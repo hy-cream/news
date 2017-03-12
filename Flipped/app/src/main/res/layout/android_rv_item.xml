@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/android_itemtv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/android_itemtv_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="who"
+        android:textSize="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:paddingBottom="5dp"/>
+    <TextView
+        android:id="@+id/android_itemtv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="5dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/android_itemtv_time"
+        android:background="#cbcbcb"
+        />
+
+</RelativeLayout>
