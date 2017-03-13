@@ -1,10 +1,12 @@
 package com.example.huyu.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,19 +31,13 @@ public class IosFragment extends Fragment {
     private IOSBean mBean;
     private HttpManager httpManager;
     private int page=1;
-    private Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 0x002:
-                    mBean=(IOSBean) msg.obj;
-                    initView();
-                    break;
-            }
-        }
+    private SwipeRefreshLayout mSwipe;
+    private Handler handler;
 
+    public IosFragment(Handler handler){
+        this.handler=handler;
+    }
 
-    };
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,13 +45,39 @@ public class IosFragment extends Fragment {
         mRv= (RecyclerView) view.findViewById(R.id.ios_rv);
         //网络请求数据
         httpManager=new HttpManager(handler);
-        httpManager.retrofitHttpGet("Ios",20,page);
+        getHttp();
+
         mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        //初始化刷新空间
+        mSwipe= (SwipeRefreshLayout) view.findViewById(R.id.ios_swipe);
+        mSwipe.setColorSchemeColors(Color.BLUE);
+        //刷新事件的监听
+        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                page++;
+                getHttp();
+            }
+        });
         return view;
     }
 
-    private void initView() {
-        mAdapter=new IOSRvAdapter(mBean,getActivity());
-        mRv.setAdapter(mAdapter);
+    public void initView(Object obj) {
+        mBean= (IOSBean) obj;
+        if (mBean!=null){
+            mAdapter=new IOSRvAdapter(mBean,getActivity());
+            mRv.setAdapter(mAdapter);
+
+            if (mSwipe.isRefreshing()){
+                mSwipe.setRefreshing(false);
+            }
+        }
+
+
+    }
+
+    public void getHttp() {
+        httpManager.retrofitHttpGet("Ios",20,page);
     }
 }

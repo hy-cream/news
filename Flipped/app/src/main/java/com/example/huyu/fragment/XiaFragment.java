@@ -3,7 +3,6 @@ package com.example.huyu.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,36 +12,44 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.huyu.adapter.AndroidRvAdapter;
-import com.example.huyu.bean.AndroidBean;
+import com.example.huyu.adapter.IOSRvAdapter;
+import com.example.huyu.adapter.XiaRvAdapter;
+import com.example.huyu.bean.IOSBean;
+import com.example.huyu.bean.XiaBean;
 import com.example.huyu.flipped.R;
 import com.example.huyu.http.HttpManager;
 
 /**
- * Created by huyu on 2017/3/10.
+ * Created by huyu on 2017/3/9.
  */
 
-public class AndroidFragment extends Fragment{
+public class XiaFragment extends Fragment {
 
     private RecyclerView mRv;
-    private AndroidRvAdapter mAdapter;
-    private AndroidBean mBean;
+    private XiaRvAdapter mAdapter;
+    private XiaBean mBean;
     private HttpManager httpManager;
-    private SwipeRefreshLayout mSwipe;
     private int page=1;
+    private SwipeRefreshLayout mSwipe;
     private Handler handler;
 
-    public AndroidFragment(Handler handler){
+    public XiaFragment(Handler handler){
         this.handler=handler;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.android_layout,container,false);
-        mRv= (RecyclerView) view.findViewById(R.id.android_rv);
+        View view=inflater.inflate(R.layout.xia_layout,container,false);
+        mRv= (RecyclerView) view.findViewById(R.id.xia_rv);
+        //网络请求数据
+        httpManager=new HttpManager(handler);
+        getHttp();
+
+        mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         //初始化刷新空间
-        mSwipe= (SwipeRefreshLayout) view.findViewById(R.id.android_swipe);
+        mSwipe= (SwipeRefreshLayout) view.findViewById(R.id.xia_swipe);
         mSwipe.setColorSchemeColors(Color.BLUE);
         //刷新事件的监听
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -52,31 +59,24 @@ public class AndroidFragment extends Fragment{
                 getHttp();
             }
         });
-
-        //网络请求数据
-        httpManager=new HttpManager(handler);
-        //获取网络请求数据
-        getHttp();
-
-        mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        mRv.addItemDecoration();
         return view;
     }
+
     public void initView(Object obj) {
-        mBean=(AndroidBean) obj;
+        mBean= (XiaBean) obj;
         if (mBean!=null){
-            mAdapter=new AndroidRvAdapter(mBean,getActivity());
+            mAdapter=new XiaRvAdapter(mBean,getActivity());
             mRv.setAdapter(mAdapter);
+
+            if (mSwipe.isRefreshing()){
+                mSwipe.setRefreshing(false);
+            }
         }
-        if (mSwipe.isRefreshing()){
-            mSwipe.setRefreshing(false);
-        }
+
 
     }
 
-    private void getHttp(){
-        httpManager.retrofitHttpGet("Android",20,page);
+    public void getHttp() {
+        httpManager.retrofitHttpGet("瞎推荐",20,page);
     }
-
-
 }

@@ -1,12 +1,9 @@
 package com.example.huyu.http;
 
 import com.example.huyu.bean.AndroidBean;
-import com.example.huyu.bean.BaseBean;
 import com.example.huyu.bean.IOSBean;
 import com.example.huyu.bean.MeiZhiBean;
-import com.example.huyu.flipped.BeanFactory;
-
-import java.util.List;
+import com.example.huyu.bean.XiaBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -27,4 +24,8 @@ public interface IGanHuoService {
     @GET("data/福利/{count}/{page}")
     Call<MeiZhiBean> getMeizhiList(@Path("count") int count,
                                    @Path("page") int page);
+
+    @GET("data/App/{count}/{page}")
+    Call<XiaBean> getXiaList(@Path("count") int count,
+                             @Path("page") int page);
 }

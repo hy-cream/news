@@ -5,25 +5,15 @@ import android.os.Message;
 import android.util.Log;
 
 import com.example.huyu.bean.AndroidBean;
-import com.example.huyu.bean.BaseBean;
 import com.example.huyu.bean.IOSBean;
 import com.example.huyu.bean.MeiZhiBean;
-import com.example.huyu.flipped.BeanFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.example.huyu.bean.XiaBean;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.R.id.background;
-import static android.R.id.candidatesArea;
-import static android.R.id.list;
-import static android.R.id.mask;
 
 /**
  * Created by huyu on 2017/3/10.
@@ -38,6 +28,7 @@ public class HttpManager {
     private static final int ANDROID_CODE=0x001;
     private static final int IOS_CODE=0x002;
     private static final int MEIZHI_CODE=0x003;
+    private static final int XIA_CODE=0x004;
 
 
 
@@ -95,6 +86,7 @@ public class HttpManager {
                 meizhiCall.enqueue(new Callback<MeiZhiBean>() {
                     @Override
                     public void onResponse(Call<MeiZhiBean> call, Response<MeiZhiBean> response) {
+                        Log.i("success-------meizhi",response.body().getResults().get(1).getCreatedAt());
                         sendMessage(MEIZHI_CODE,response.body());
 
                     }
@@ -105,11 +97,23 @@ public class HttpManager {
                     }
                 });
                 break;
+            case "瞎推荐":
+                Call<XiaBean> xiaCall=service.getXiaList(count,page);
+                xiaCall.enqueue(new Callback<XiaBean>() {
+                    @Override
+                    public void onResponse(Call<XiaBean> call, Response<XiaBean> response) {
+                        Log.i("success-------xia",response.body().getResults().get(1).getWho());
+                        sendMessage(XIA_CODE,response.body());
+                    }
 
+                    @Override
+                    public void onFailure(Call<XiaBean> call, Throwable t) {
+
+                    }
+                });
+                break;
+            default:break;
         }
-
-        return;
-
     }
 
 
