@@ -2,6 +2,9 @@ package com.example.huyu.flipped;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +25,7 @@ public class WebActivity extends AppCompatActivity {
     private WebView mWv;
     private String url;
     private WebSettings mWebsetting;
+    private String APP_CACAHE_DIRNAME="/flippd";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +55,7 @@ public class WebActivity extends AppCompatActivity {
         }
 
         /**
-         * websetting的设置
+         * websetting的设置，主要用于设置了缓存
          */
         mWebsetting=mWv.getSettings();
         mWebsetting.setJavaScriptEnabled(true);
@@ -63,6 +67,35 @@ public class WebActivity extends AppCompatActivity {
         LOAD_CACHE_ELSE_NETWORK：只要本地有，无论是否过期，或者no-cache，都使用缓存中的数据。
         */
         mWebsetting.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        //在有网的情况下，LOAD_DEFAULT，无网的时候用LOAD_CACHE_ELSE_NETWORK
+        ConnectivityManager manager= (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        if (manager!=null){
+            NetworkInfo info=manager.getActiveNetworkInfo();
+//            if (info!=null&&info.isConnected()){
+//                //当前网络是可用的
+//                if (info.getState() == NetworkInfo.State.CONNECTED){
+//
+//                }
+//            }
+            //当前网络可用
+            if (info.isAvailable()){
+                mWebsetting.setCacheMode(WebSettings.LOAD_DEFAULT);
+            }else {
+                mWebsetting.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            }
+        }
+//         mWv.getSettings().setBlockNetworkImage(true);// 把图片加载放在最后来加载渲染
+        String cacheDirPath = getFilesDir().getAbsolutePath()+APP_CACAHE_DIRNAME;
+        //设置  Application Caches 缓存目录
+        mWv.getSettings().setAppCachePath(cacheDirPath);
+
+
+        // 开启 Application Caches 功能
+        mWv.getSettings().setAppCacheEnabled(true);
+        // 支持多窗口
+        mWv.getSettings().setSupportMultipleWindows(true);
+        // 开启 DOM storage API 功能
+        mWv.getSettings().setDomStorageEnabled(true);
 
 
         /**
