@@ -6,7 +6,7 @@ import java.util.List;
  * Created by huyu on 2017/3/10.
  */
 
-public class IOSBean  extends BaseBean{
+public class IOSBean{
 
     private boolean error;
     private List<Results> results ;

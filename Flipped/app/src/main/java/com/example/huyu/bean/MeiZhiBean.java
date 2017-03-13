@@ -6,7 +6,7 @@ import java.util.List;
  * Created by huyu on 2017/3/10.
  */
 
-public class MeiZhiBean extends BaseBean{
+public class MeiZhiBean{
 
     private boolean error;
 
@@ -26,7 +26,7 @@ public class MeiZhiBean extends BaseBean{
     }
 
 
-    class Results{
+    public class Results{
         private String _id;
         private String createdAt;
         private String desc;

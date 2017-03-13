@@ -6,7 +6,7 @@ import java.util.List;
  * Created by huyu on 2017/3/10.
  */
 
-public class AndroidBean extends BaseBean{
+public class AndroidBean{
 
     private boolean error;
 
