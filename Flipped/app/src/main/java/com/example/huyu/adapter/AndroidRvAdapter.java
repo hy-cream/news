@@ -2,19 +2,13 @@ package com.example.huyu.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.huyu.bean.AndroidBean;
-import com.example.huyu.bean.BaseBean;
 import com.example.huyu.flipped.R;
 import com.example.huyu.flipped.WebActivity;
 
