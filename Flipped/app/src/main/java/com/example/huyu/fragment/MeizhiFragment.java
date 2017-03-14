@@ -48,6 +48,7 @@ public class MeizhiFragment extends Fragment {
         View view=inflater.inflate(R.layout.meizhi_layout,container,false);
         mRecyclerView= (RecyclerView) view.findViewById(R.id.meizhi_rv);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        initView(null);
         //网络请求数据
         httpManager=new HttpManager(handler);
         getHttp();
@@ -67,11 +68,28 @@ public class MeizhiFragment extends Fragment {
     }
 
     public void initView(Object obj) {
-        meiZhiBean = (MeiZhiBean) obj;
-        if (meiZhiBean != null) {
+        if (obj != null) {
+            meiZhiBean = (MeiZhiBean) obj;
             Log.i("meizhi-------","set adapter");
             mAdapter = new MeiRvAdapter(getActivity(), meiZhiBean);
             mRecyclerView.setAdapter(mAdapter);
+
+            //实现接口
+            mAdapter.setOnItemLongClick(new MeiRvAdapter.OnItemLongClickDownload() {
+                @Override
+                public void onItemLongClickDownload(View view, int position,String url) {
+                    //发送消息给Mainactivity中开启服务
+                    Message message=Message.obtain();
+                    message.what=0x005;
+                    Bundle bundle=new Bundle();
+                    bundle.putString("url",url);
+                    message.setData(bundle);
+                    Log.i("Meizhifragment",url);
+                    handler.sendMessage(message);
+                }
+            });
+
+
             Log.i("meizhi-------","set adapter finsh");
 
             if (mSwipe.isRefreshing()) {
