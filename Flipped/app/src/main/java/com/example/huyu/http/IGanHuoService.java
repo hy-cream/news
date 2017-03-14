@@ -5,6 +5,8 @@ import com.example.huyu.bean.IOSBean;
 import com.example.huyu.bean.MeiZhiBean;
 import com.example.huyu.bean.XiaBean;
 
+import java.security.Key;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -28,4 +30,9 @@ public interface IGanHuoService {
     @GET("data/App/{count}/{page}")
     Call<XiaBean> getXiaList(@Path("count") int count,
                              @Path("page") int page);
+
+//    @GET("data/{type}/{count}/{page}")
+//    Call<Object> getList(@Path("type") String type,
+//                      @Path("count") int count,
+//                      @Path("page") int page);
 }

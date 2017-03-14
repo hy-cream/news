@@ -46,6 +46,10 @@ public class HttpManager {
         //获取service
         service=retrofit.create(IGanHuoService.class);
 
+//        Call<Object> call=service.getList(type,count,page);
+//        call.enqueue(new Callback<Object>() {
+//        });
+
         switch(type){
             case "Android":
                 Call<AndroidBean> call=service.getAndroidList(count,page);

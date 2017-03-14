@@ -1,12 +1,13 @@
 package com.example.huyu.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by huyu on 2017/3/10.
  */
 
-public class AndroidBean{
+public class AndroidBean implements Serializable{
 
     private boolean error;
 
