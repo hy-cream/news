@@ -1,15 +1,17 @@
 package com.example.huyu.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by huyu on 2017/3/13.
  */
 
-public class XiaBean {
+public class XiaBean implements Serializable{
 
     private boolean error;
     private List<Results> results;
+
     public void setError(boolean error) {
         this.error = error;
     }
