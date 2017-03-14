@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,8 @@ public class XiaFragment extends Fragment {
     private int page=1;
     private SwipeRefreshLayout mSwipe;
     private Handler handler;
+    private AppBarLayout mAppbar;
+    private LinearLayoutManager mLinearManager;
 
     public XiaFragment(Handler handler){
         this.handler=handler;
@@ -41,12 +44,43 @@ public class XiaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.xia_layout,container,false);
+
+
         mRv= (RecyclerView) view.findViewById(R.id.xia_rv);
+        mAppbar= (AppBarLayout) view.findViewById(R.id.xia_appbar);
+        mLinearManager=new LinearLayoutManager(getActivity());
+        /**
+         * 初始化recyclerView,并且初步解决对APPBarLayout的滚动效果
+         */
+        mRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                //到达顶部时则显示他的APPBarLayout
+                int itemposition=mLinearManager.findFirstVisibleItemPosition();
+                if (itemposition==0){
+                    mAppbar.setExpanded(true);
+                }
+
+                /**
+                 * 解决recycle人View和SwipeRefreshLayout的滑动冲突
+                 */
+                int topRowVerticalPosition =
+                        (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
+                mSwipe.setEnabled(topRowVerticalPosition >= 0);
+            }
+        });
+
+
         //网络请求数据
         httpManager=new HttpManager(handler);
         getHttp();
 
-        mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRv.setLayoutManager(mLinearManager);
 
         //初始化刷新空间
         mSwipe= (SwipeRefreshLayout) view.findViewById(R.id.xia_swipe);
