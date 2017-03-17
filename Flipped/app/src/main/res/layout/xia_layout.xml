@@ -22,9 +22,9 @@
 
         <!--snap 原来是为解决滑动冲突的问题，后来滑动和卡顿，所以要进行recycle人View的判断-->
         <com.example.huyu.view.SlideView
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            app:layout_scrollFlags="scroll"/>
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:layout_scrollFlags="scroll"/>
     </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView

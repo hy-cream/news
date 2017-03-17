@@ -21,7 +21,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpManager {
 
-
     private Handler handler;
     private Retrofit retrofit;
     private IGanHuoService service;
@@ -29,8 +28,6 @@ public class HttpManager {
     private static final int IOS_CODE=0x002;
     private static final int MEIZHI_CODE=0x003;
     private static final int XIA_CODE=0x004;
-
-
 
     public HttpManager(Handler handler){
         this.handler=handler;

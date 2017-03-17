@@ -115,8 +115,8 @@ public class MeiRvAdapter extends  RecyclerView.Adapter<MeiRvAdapter.MeiViewHold
         //.override(300, 200);
         ////固定imageView的大小
             Glide.with(mContext)
-                    .load(meiResult.getUrl())
-                    .into(holder.imageView);
+                .load(meiResult.getUrl())
+                .into(holder.imageView);
 
         holder.desc.setText(meiResult.getDesc());
 

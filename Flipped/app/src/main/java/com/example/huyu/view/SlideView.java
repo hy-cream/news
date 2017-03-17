@@ -35,7 +35,7 @@ public class SlideView extends FrameLayout {
 
     private ViewPager mViewPager;
     private List<ImageView> mImgList;
-    private int[] imgId={R.mipmap.iv1,R.mipmap.iv2,R.mipmap.iv3, R.mipmap.iv4};
+    private int[] imgId={R.drawable.tu1,R.drawable.tu2,R.drawable.tu3, R.drawable.tu4};
     private List<View> mdotList;
 
     //当前轮播页
@@ -60,7 +60,6 @@ public class SlideView extends FrameLayout {
                 //false从尾页换到首页不展示动画效果
                 mViewPager.setCurrentItem(currentItem);
             }
-
 
         }
     };

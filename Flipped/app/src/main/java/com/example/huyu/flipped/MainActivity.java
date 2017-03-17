@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mVp;
     private List<Fragment> mFragmentList;
     private  String[] mTitles={"ANDROID","IOS","瞎推荐","妹子图"};
-    private int[] mImgs={R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher};
+    //private int[] mImgs={R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.girl1};
     private MainVpAdapter mMainVpAdapter;
     private TabLayout.Tab androidTab,iosTab,xiaTab,meizhiTab;
     private static final int ANDROID_CODE=0x001;
@@ -152,10 +152,10 @@ public class MainActivity extends AppCompatActivity {
         //tabLayout绑定ViewPager
         mTl.setupWithViewPager(mVp);
         //
-        androidTab = mTl.getTabAt(0).setIcon(mImgs[0]);
-        iosTab= mTl.getTabAt(1).setIcon(mImgs[1]);
-        xiaTab = mTl.getTabAt(2).setIcon(mImgs[2]);
-        meizhiTab= mTl.getTabAt(3).setIcon(mImgs[3]);
+        androidTab = mTl.getTabAt(0).setIcon(R.drawable.tab1);
+        iosTab= mTl.getTabAt(1).setIcon(R.drawable.tab2);
+        xiaTab = mTl.getTabAt(2).setIcon(R.drawable.tab3);
+        meizhiTab= mTl.getTabAt(3).setIcon(R.drawable.tab4);
 
 
 

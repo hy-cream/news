@@ -131,7 +131,6 @@ public class WebActivity extends AppCompatActivity {
         /**
          * 设置加载网页时的进度条
          */
-
         mWv.setWebChromeClient(new WebChromeClient(){
 
             //重写onProgressChanged函数

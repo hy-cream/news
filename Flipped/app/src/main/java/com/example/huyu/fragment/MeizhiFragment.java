@@ -74,6 +74,15 @@ public class MeizhiFragment extends Fragment {
             mAdapter = new MeiRvAdapter(getActivity(), meiZhiBean);
             mRecyclerView.setAdapter(mAdapter);
 
+
+
+
+            Log.i("meizhi-------","set adapter finsh");
+
+            if (mSwipe.isRefreshing()) {
+                mSwipe.setRefreshing(false);
+            }
+
             //实现接口
             mAdapter.setOnItemLongClick(new MeiRvAdapter.OnItemLongClickDownload() {
                 @Override
@@ -88,13 +97,6 @@ public class MeizhiFragment extends Fragment {
                     handler.sendMessage(message);
                 }
             });
-
-
-            Log.i("meizhi-------","set adapter finsh");
-
-            if (mSwipe.isRefreshing()) {
-                mSwipe.setRefreshing(false);
-            }
         }else {
             Log.i("meizhitu-----------","nullllll");
         }
