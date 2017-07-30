@@ -89,9 +89,7 @@ public class HttpManager {
                     public void onResponse(Call<MeiZhiBean> call, Response<MeiZhiBean> response) {
                         Log.i("success-------meizhi",response.body().getResults().get(1).getCreatedAt());
                         sendMessage(MEIZHI_CODE,response.body());
-
                     }
-
                     @Override
                     public void onFailure(Call<MeiZhiBean> call, Throwable t) {
 

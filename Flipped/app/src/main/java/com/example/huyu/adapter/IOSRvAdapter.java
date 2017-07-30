@@ -56,7 +56,6 @@ public class IOSRvAdapter extends RecyclerView.Adapter<IOSRvAdapter.IosViewHolde
         });
         return holder;
     }
-
     @Override
     public void onBindViewHolder( IosViewHolder holder, int position) {
         IOSBean.Results iosResult=mList.get(position);

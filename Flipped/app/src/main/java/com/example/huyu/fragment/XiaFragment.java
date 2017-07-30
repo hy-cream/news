@@ -57,7 +57,6 @@ public class XiaFragment extends Fragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 
             }
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 //到达顶部时则显示他的APPBarLayout
@@ -65,7 +64,6 @@ public class XiaFragment extends Fragment {
                 if (itemposition==0){
                     mAppbar.setExpanded(true);
                 }
-
                 /**
                  * 解决recycle人View和SwipeRefreshLayout的滑动冲突
                  */
@@ -74,8 +72,6 @@ public class XiaFragment extends Fragment {
                 mSwipe.setEnabled(topRowVerticalPosition >= 0);
             }
         });
-
-
         //网络请求数据
         httpManager=new HttpManager(handler);
         getHttp();

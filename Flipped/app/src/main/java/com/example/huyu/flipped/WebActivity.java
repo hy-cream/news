@@ -108,7 +108,6 @@ public class WebActivity extends AppCompatActivity {
                 super.onPageStarted(view, url, favicon);
 
             }
-
             //加载完成后
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -116,10 +115,8 @@ public class WebActivity extends AppCompatActivity {
 
                 if (!mWv.getSettings().getLoadsImagesAutomatically()){
                     mWv.getSettings().setLoadsImagesAutomatically(true);
-
                 }
             }
-
             //加载错误时
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {

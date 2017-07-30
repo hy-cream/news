@@ -133,9 +133,7 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
         }
-
     }
-
     private void initData() {
         AndroidFragment android=new AndroidFragment(handler);
         IosFragment ios=new IosFragment(handler);
@@ -145,13 +143,10 @@ public class MainActivity extends AppCompatActivity {
         mFragmentList.add(ios);
         mFragmentList.add(xia);
         mFragmentList.add(meizhi);
-
-
         mMainVpAdapter=new MainVpAdapter(getSupportFragmentManager(),mFragmentList,mTitles);
         mVp.setAdapter(mMainVpAdapter);
         //tabLayout绑定ViewPager
         mTl.setupWithViewPager(mVp);
-        //
         androidTab = mTl.getTabAt(0).setIcon(R.drawable.tab1);
         iosTab= mTl.getTabAt(1).setIcon(R.drawable.tab2);
         xiaTab = mTl.getTabAt(2).setIcon(R.drawable.tab3);

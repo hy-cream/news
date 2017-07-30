@@ -73,10 +73,6 @@ public class MeizhiFragment extends Fragment {
             Log.i("meizhi-------","set adapter");
             mAdapter = new MeiRvAdapter(getActivity(), meiZhiBean);
             mRecyclerView.setAdapter(mAdapter);
-
-
-
-
             Log.i("meizhi-------","set adapter finsh");
 
             if (mSwipe.isRefreshing()) {
